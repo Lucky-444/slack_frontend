@@ -22,3 +22,6 @@ other wise see the video
 
 # atom design pattern
 <!--  -->
+
+## Read ABOUT QUERYCLIENT
+https://tanstack.com/query/v5/docs/reference/QueryClient
