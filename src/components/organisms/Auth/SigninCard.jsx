@@ -1,7 +1,6 @@
-  
-import { LucideLoader2, TriangleAlert } from 'lucide-react';
-import { FaCheck } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
+import { LucideLoader2, TriangleAlert } from "lucide-react";
+import { FaCheck } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -21,11 +20,9 @@ export const SigninCard = ({
   validationErrors,
   error,
   isSuccess,
-  isPending
+  isPending,
 }) => {
   const navigate = useNavigate();
-
-
 
   return (
     <Card classname="w-full h-full">
@@ -33,7 +30,7 @@ export const SigninCard = ({
         <CardTitle>Sign In</CardTitle>
         <CardDescription>Sign in to access your account</CardDescription>
 
-          {validationErrors && (
+        {validationErrors && (
           <div className="bg-destructive/15 p-4 rounded-md items-center gap-x-2 text-destructive mb-6">
             <div>
               <TriangleAlert size={17} />
@@ -59,17 +56,10 @@ export const SigninCard = ({
             </p>
           </div>
         )}
-
-
-
-
       </CardHeader>
 
-
-
-
       <CardContent>
-        <form className="space-y-4">
+        <form className="space-y-4" onSubmit={onSigninFormSubmit}>
           <Input
             disabled={isPending}
             placeholder="Email"
@@ -91,7 +81,12 @@ export const SigninCard = ({
             }
           />
 
-          <Button className="w-full" disabled={isPending} size="lg" type="submit">
+          <Button
+            className="w-full"
+            disabled={isPending}
+            size="lg"
+            type="submit"
+          >
             Continue
           </Button>
         </form>

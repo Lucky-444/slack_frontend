@@ -29,7 +29,14 @@ function App() {
             </Auth>
           }
         />
-        <Route path="/home" element={<Auth><h1>Home</h1></Auth>} />
+        <Route
+          path="/home"
+          element={
+            <Auth>
+              <h1>Home</h1>
+            </Auth>
+          }
+        />
 
         <Route path="/*" element={<NotFound />} />
       </Routes>
