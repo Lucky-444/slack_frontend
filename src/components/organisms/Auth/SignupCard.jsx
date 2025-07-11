@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 import {
   Card,
   CardHeader,
   CardTitle,
   CardContent,
   CardDescription,
-  
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 
@@ -15,6 +15,7 @@ export const SignupCard = () => {
     email: "",
     password: "",
     confirmPassword: "",
+    username: "",
   });
 
   return (
@@ -33,6 +34,17 @@ export const SignupCard = () => {
             }
             value={signupForm.email}
             type="email"
+            disabled={false}
+          />
+          <Input
+            type="text"
+            name="username"
+            placeholder="username"
+            required
+            value={signupForm.username}
+            onChange={(e) =>
+              setSignupForm({ ...signupForm, username: e.target.value })
+            }
             disabled={false}
           />
 
@@ -58,15 +70,17 @@ export const SignupCard = () => {
             }
             disabled={false}
           />
-          <Button
-            type="submit"
-            size = "lg"
-            disabled = {false}
-            className="w-full bg-[#5f3e5b] text-white hover:bg-[#4c2d4a] transition-colors duration-200"
-          >
+          <Button type="submit" size="lg" disabled={false} className="w-full">
             Continue
           </Button>
         </form>
+
+        <Separator className="my-4" />
+
+        <p className="text-center text-sm text-muted-foreground mt-4">
+          Already have an account?{" "}
+          <span className="text-sky-600 hover:underline cursor-pointer">Sign In</span>
+        </p>
       </CardContent>
     </Card>
   );
