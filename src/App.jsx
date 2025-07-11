@@ -1,8 +1,8 @@
 import './App.css'
 import { Route, Routes } from "react-router-dom";
-import { Auth } from "./pages/Auth/Auth";
-import { SignupCard } from './components/organisms/Auth/SignupCard';
-import { SigninCard } from './components/organisms/Auth/SigninCard';
+import { Auth } from "@/pages/Auth/Auth";
+import { SignupCard } from '@/components/organisms/Auth/SignupCard';
+import { SigninCard } from '@/components/organisms/Auth/SigninCard';
 
 function App() {
   return (
