@@ -7,13 +7,14 @@ import { SignupContainer } from "./components/organisms/Auth/SignupContainer";
 import { Toaster } from "@/components/ui/toaster";
 import { SigninContainer } from "./components/organisms/Auth/SigninContainer";
 import { AuthContextProvider } from "./context/AuthContext";
+import { AppContextProvider } from "./context/AppContextProvider";
 
 function App() {
   const queryClient = new QueryClient();
 
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthContextProvider>
+      <AppContextProvider>
         <Routes>
           <Route
             path="/auth/signup"
@@ -43,7 +44,7 @@ function App() {
           <Route path="/*" element={<NotFound />} />
         </Routes>
         <Toaster />
-      </AuthContextProvider>
+      </AppContextProvider>
     </QueryClientProvider>
   );
 }
