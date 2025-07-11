@@ -1,5 +1,7 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+  
+import { LucideLoader2, TriangleAlert } from 'lucide-react';
+import { FaCheck } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 import { Button } from "@/components/ui/button";
 import {
@@ -12,25 +14,64 @@ import {
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 
-export const SigninCard = () => {
+export const SigninCard = ({
+  onSigninFormSubmit,
+  signinForm,
+  setSigninForm,
+  validationErrors,
+  error,
+  isSuccess,
+  isPending
+}) => {
   const navigate = useNavigate();
 
-  const [signinForm, setSigninForm] = useState({
-    email: "",
-    password: "",
-  });
+
 
   return (
     <Card classname="w-full h-full">
       <CardHeader>
         <CardTitle>Sign In</CardTitle>
         <CardDescription>Sign in to access your account</CardDescription>
+
+          {validationErrors && (
+          <div className="bg-destructive/15 p-4 rounded-md items-center gap-x-2 text-destructive mb-6">
+            <div>
+              <TriangleAlert size={17} />
+              <p>{validationErrors.message}</p>
+            </div>
+          </div>
+        )}
+
+        {error && (
+          <div className="bg-destructive/15 p-4 rounded-md flex items-center gap-x-2 text-sm text-destructive mb-6">
+            <TriangleAlert className="size-5" />
+            <p>{error.message}</p>
+          </div>
+        )}
+
+        {isSuccess && (
+          <div className="bg-primary/15 p-3 rounded-md flex items-center gap-x-2 text-sm text-primary mb-5">
+            <FaCheck className="size-5" />
+            <p>
+              Successfully signed up. You will be redirected to the login page
+              in a few seconds.
+              <LucideLoader2 className="animate-spin ml-2" />
+            </p>
+          </div>
+        )}
+
+
+
+
       </CardHeader>
+
+
+
 
       <CardContent>
         <form className="space-y-4">
           <Input
-            disabled={false}
+            disabled={isPending}
             placeholder="Email"
             required
             type="email"
@@ -40,7 +81,7 @@ export const SigninCard = () => {
             }
           />
           <Input
-            disabled={false}
+            disabled={isPending}
             placeholder="Password"
             required
             type="password"
@@ -50,7 +91,7 @@ export const SigninCard = () => {
             }
           />
 
-          <Button className="w-full" disabled={false} size="lg" type="submit">
+          <Button className="w-full" disabled={isPending} size="lg" type="submit">
             Continue
           </Button>
         </form>
