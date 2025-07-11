@@ -12,7 +12,7 @@ export default function combineContext(...providers) {
   };
 }
 
-/**
+/**[A , B , C , D] the array
  * <A>
  *      <B>
  *            <C>
@@ -23,6 +23,13 @@ export default function combineContext(...providers) {
  *      </B>
  * </A>
  */
+
+/**
+ * return value ==> <D> children </D>
+ * then  it comes to accumulator --> like prefix and suffix sum
+ */
+
+
 
 /**
  * <combined>
