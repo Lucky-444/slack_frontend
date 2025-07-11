@@ -14,6 +14,17 @@ export const useSignin = () => {
     mutationFn: signInRequest,
     onSuccess: (data) => {
       console.log("Scuccessfully signed in", data);
+      //now store the token in localStorage or cookies
+      //you can use sessionStorage or cookies as well
+      // For this example, we will use localStorage
+      // Store the token in localStorage
+      // why LocalStorage? It persists even after the browser is closed
+      // and is accessible across tabs
+      //we store it in string format
+      const token = JSON.stringify(data.data);
+      localStorage.setItem("user", token);
+      localStorage.setItem("token", data.data.token);
+      // Optionally redirect to home page or another route
       toast({
         title: "Successfully signed in",
         message: "You will be redirected to the home page in a few seconds",
