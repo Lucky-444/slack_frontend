@@ -27,7 +27,7 @@ export const CreateWorkspaceModal = () => {
     setOpenCreateWorkspaceModal(false);
   }
 
-  async function handleFormSubmit() {
+  async function handleFormSubmit(e) {
     e.preventDefault();
 
       try {
