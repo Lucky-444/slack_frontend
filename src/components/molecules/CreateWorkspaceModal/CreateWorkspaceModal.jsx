@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useCreateWorkspace } from "@/hooks/apis/workspaces/useCreateWorkspace";
 
-export const createWorkspaceModal = () => {
+export const CreateWorkspaceModal = () => {
   const { openCreateWorkspaceModal, setOpenCreateWorkspaceModal } =
     useCreateWorkspaceModal();
 
