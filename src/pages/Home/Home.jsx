@@ -14,7 +14,8 @@ export const Home = () => {
     if (workspaces.length === 0 || !workspaces) {
       console.log("You Have no Workspace Please Crate One");
     }else{
-      navigate(`/workspaces/:${workspaces[0]._id}`)
+      navigate(`/workspaces/${workspaces[0]._id}`)
+
     }
   }, [isFetching, workspaces , navigate]);
 
