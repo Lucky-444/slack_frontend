@@ -2,9 +2,11 @@ import { useMutation } from "@tanstack/react-query";
 
 import { signInRequest } from "@/apis/auth";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/hooks/context/useAuth";
 
 export const useSignin = () => {
   const { toast } = useToast();
+  const { setAuth } = useAuth();
   const {
     isPending,
     isSuccess,
@@ -21,10 +23,24 @@ export const useSignin = () => {
       // why LocalStorage? It persists even after the browser is closed
       // and is accessible across tabs
       //we store it in string format
+
+      /**
+       * now we uodate our isLoading state of the context also
+       * so
+       */
+      
+
       const token = JSON.stringify(data.data);
       localStorage.setItem("user", token);
       localStorage.setItem("token", data.data.token);
       // Optionally redirect to home page or another route
+
+      setAuth({
+        token: data.data.token,
+        user: data.data,
+        loading: false,
+      });
+
       toast({
         title: "Successfully signed in",
         message: "You will be redirected to the home page in a few seconds",
