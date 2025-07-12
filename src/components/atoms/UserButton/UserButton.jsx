@@ -8,8 +8,10 @@ import {
 import { useAuth } from "@/hooks/context/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import { LogOutIcon, SettingsIcon } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export const UserButton = () => {
+  const navigate = useNavigate();
   const { auth, logout } = useAuth();
   const { toast } = useToast();
 
@@ -19,8 +21,8 @@ export const UserButton = () => {
       title: "Logout successFully",
       status: "success",
       type: "success",
-      message: "you will be redirected to the login page",
     });
+    navigate('/auth/signin');
   }
 
   return (
