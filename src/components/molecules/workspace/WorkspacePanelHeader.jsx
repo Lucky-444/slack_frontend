@@ -1,4 +1,5 @@
 import { ChevronDownIcon, ListFilterIcon, SquarePenIcon } from "lucide-react";
+import { useWorkspacePreferencesModal } from "@/hooks/context/useWorkspacePreferencesModal";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -22,6 +23,9 @@ export const WorkspacePanelHeader = ({ workspace }) => {
   const isLoggedInUserAdminOfWorkspace = workspacemembers?.find(
     (member) => member.memberId === auth?.user?._id && member.role === "admin"
   );
+
+
+  const { openPreferences, setOpenPreferences } = useWorkspacePreferencesModal();
 
   return (
     <div className="flex items-center justify-between px-4 h-[50px] gap-0.5">
@@ -49,7 +53,13 @@ export const WorkspacePanelHeader = ({ workspace }) => {
 
           {isLoggedInUserAdminOfWorkspace && (
             <>
-              <DropdownMenuItem className="cursor-pointer py-2">
+              <DropdownMenuItem className="cursor-pointer py-2"
+                onClick={() => {
+                  // Open the workspace preferences modal
+                  // This function should be defined to handle opening the modal
+                  setOpenPreferences(true);
+                }}
+              >
                 Preferences
               </DropdownMenuItem>
               <DropdownMenuSeparator />
