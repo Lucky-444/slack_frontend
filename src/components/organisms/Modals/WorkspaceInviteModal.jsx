@@ -9,15 +9,18 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
+import { useResetJoinCode } from "../../../hooks/apis/workspaces/useResetJoinCode";
 
 export const WorkspaceInviteModal = ({
   openInviteModal,
   setOpenInviteModal,
   workspaceName,
   joinCode,
+  workspaceId,
 }) => {
   const { toast } = useToast();
 
+  const { resetJoinCodeMutation } = useResetJoinCode(workspaceId);
   async function handleCopy() {
     const inviteLink = `${window.location.origin}/join/${joinCode}`;
     await navigator.clipboard.writeText(inviteLink);
@@ -27,7 +30,25 @@ export const WorkspaceInviteModal = ({
     });
   }
 
-  async function handleResetCode() {}
+  async function handleResetCode() {
+    // Logic to reset the join code
+    // This could involve an API call to your backend to generate a new join code
+    // For now, we'll just show a success message
+    try {
+      await resetJoinCodeMutation();
+      toast({
+        title: "Join code reset successfully",
+        type: "success",
+      });
+        setOpenInviteModal(false);
+    } catch (error) {
+      console.log("handleResetCode error", error);
+      toast({
+        title: "Something Went Wrong",
+        type: "error",
+      });
+    }
+  }
 
   return (
     <Dialog open={openInviteModal} onOpenChange={setOpenInviteModal}>
@@ -41,7 +62,7 @@ export const WorkspaceInviteModal = ({
 
         <div className="flex flex-col items-center justify-center py-10 gap-y-4">
           <p className="font-bold text-4xl uppercase">{joinCode}</p>
-          <Button size="sm" variant="ghost" onClick={handleCopy}>
+          <Button size="lg" variant="ghost" onClick={handleCopy}>
             Copy Link
             <CopyIcon className="size-4 ml-2" />
           </Button>
