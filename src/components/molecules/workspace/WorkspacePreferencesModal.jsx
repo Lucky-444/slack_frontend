@@ -7,16 +7,41 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { useWorkspacePreferencesModal } from "../../../hooks/context/useWorkspacePreferencesModal";
+import { useDeleteWorkspace } from "../../../hooks/apis/workspaces/useDeleteWorkspace";
+import { useToast } from "@/hooks/use-toast";
+import { useEffect, useState } from "react";
 
 export const WorkspacePreferencesModal = () => {
-  const { initialValue, openPreferences, setOpenPreferences } =
+  const { toast } = useToast();
+  const { initialValue, openPreferences, setOpenPreferences, workspace } =
     useWorkspacePreferencesModal();
+  const [workspaceId, setWorkspaceId] = useState(null);
 
-    console.log({initialValue});
-    
+  const { deleteWorkspaceMutation } = useDeleteWorkspace(workspaceId);
 
   function handleClose() {
     setOpenPreferences(false);
+  }
+
+  useEffect(() => {
+    setWorkspaceId(workspace?._id);
+  }, [workspace]);
+
+  async function handeDelete() {
+    try {
+      await deleteWorkspaceMutation();
+
+      toast({
+        title: "Workspace deleted successfully",
+        type: "success",
+      });
+    } catch (error) {
+      console.log("Error in deleting workspace", error);
+      toast({
+        title: "Error in deleting workspace",
+        type: "error",
+      });
+    }
   }
 
   return (
@@ -32,11 +57,14 @@ export const WorkspacePreferencesModal = () => {
               <p className="font-semibold text-sm">Workspace Name</p>
               <p className="text-sm font-semibold hover:underline">Edit</p>
             </div>
-           
+
             <p className="text-sm">{initialValue}</p>
           </div>
 
-          <button className="flex items-center gap-x-2 px-5 py-4 bg-white rounded-lg border cursor-pointer hover:bg-gray-50">
+          <button
+            className="flex items-center gap-x-2 px-5 py-4 bg-white rounded-lg border cursor-pointer hover:bg-gray-50"
+            onClick={ handeDelete }
+          >
             <TrashIcon className="size-5" />
             <p>Delete Workspace</p>
           </button>

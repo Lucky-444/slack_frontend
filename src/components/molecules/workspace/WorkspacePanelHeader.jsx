@@ -10,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useAuth } from "@/hooks/context/useAuth";
+import { useEffect } from "react";
 
 export const WorkspacePanelHeader = ({ workspace }) => {
   console.log("workspace is", workspace);
@@ -26,6 +27,14 @@ export const WorkspacePanelHeader = ({ workspace }) => {
 
 
   const { openPreferences, setOpenPreferences , setInitialValue  } = useWorkspacePreferencesModal();
+  const { setWorkspace } = useWorkspacePreferencesModal();
+
+  useEffect(() => {
+    setWorkspace(workspace)
+  }, [])
+  
+
+
 
   return (
     <div className="flex items-center justify-between px-4 h-[50px] gap-0.5">
