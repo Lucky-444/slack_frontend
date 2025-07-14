@@ -6,11 +6,14 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { useWorkspacePreferencesModal } from "@/hooks/context/useWorkspacePreferencesModal";
+import { useWorkspacePreferencesModal } from "../../../hooks/context/useWorkspacePreferencesModal";
 
 export const WorkspacePreferencesModal = () => {
   const { initialValue, openPreferences, setOpenPreferences } =
     useWorkspacePreferencesModal();
+
+    console.log({initialValue});
+    
 
   function handleClose() {
     setOpenPreferences(false);
@@ -29,6 +32,8 @@ export const WorkspacePreferencesModal = () => {
               <p className="font-semibold text-sm">Workspace Name</p>
               <p className="text-sm font-semibold hover:underline">Edit</p>
             </div>
+           
+            <p className="text-sm">{initialValue}</p>
           </div>
 
           <button className="flex items-center gap-x-2 px-5 py-4 bg-white rounded-lg border cursor-pointer hover:bg-gray-50">

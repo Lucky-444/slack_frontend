@@ -25,7 +25,7 @@ export const WorkspacePanelHeader = ({ workspace }) => {
   );
 
 
-  const { openPreferences, setOpenPreferences } = useWorkspacePreferencesModal();
+  const { openPreferences, setOpenPreferences , setInitialValue  } = useWorkspacePreferencesModal();
 
   return (
     <div className="flex items-center justify-between px-4 h-[50px] gap-0.5">
@@ -57,7 +57,8 @@ export const WorkspacePanelHeader = ({ workspace }) => {
                 onClick={() => {
                   // Open the workspace preferences modal
                   // This function should be defined to handle opening the modal
-                  setOpenPreferences(true);
+                  setOpenPreferences(true)
+                  setInitialValue(workspace?.name);
                 }}
               >
                 Preferences
