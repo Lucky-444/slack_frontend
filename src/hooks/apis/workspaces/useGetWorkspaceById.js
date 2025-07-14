@@ -17,3 +17,8 @@ export const useGetWorkspaceById = (id) => {
         workspace
     };
 };
+
+
+// when the workspace is deleted, redirect to home page
+// when the workspace is updated we invalidate our queryKey and re fetch the workspace details
+// so that our updated workspace name is reflected in the UI

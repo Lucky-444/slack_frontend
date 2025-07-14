@@ -1,10 +1,10 @@
 import { updateWorkspaceRequest } from "../../../apis/workspaces";
-import { useAuth } from "../../../context/AuthContext";
+import { useAuth } from "@/hooks/context/useAuth";
 import { useMutation } from "@tanstack/react-query";
 
 export const useUpdateWorkspace = (workspaceId) => {
   const { auth } = useAuth(); // Assuming you have a way to get the auth token
-  token = auth?.token;
+ const token = auth?.token;
 
   const {
     isPending,
