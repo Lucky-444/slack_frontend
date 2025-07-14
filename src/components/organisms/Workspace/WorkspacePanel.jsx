@@ -3,9 +3,12 @@ import { useGetWorkspaceById } from "../../../hooks/apis/workspaces/useGetWorksp
 import { AlertTriangleIcon, HashIcon, Loader, MessageSquareTextIcon, SendHorizonal, SendHorizonalIcon } from "lucide-react";
 import { WorkspacePanelHeader } from "../../molecules/workspace/WorkspacePanelHeader";
 import { SideBarItem } from "../../atoms/SideBarItem/SideBarItem";
+import { WorkspacePanelSection } from "../../molecules/workspace/WorkspacePanelSection";
+import { useCreateChannelModal } from "../../../hooks/context/useCreateChannelModal";
 
 export const WorkspacePanel = () => {
   const { workspaceId } = useParams();
+  const { setOpenCreateChannelModal } = useCreateChannelModal();
   const { workspace, isFetching, isSuccess } = useGetWorkspaceById(workspaceId);
   if (isFetching) {
     return (
@@ -41,11 +44,14 @@ export const WorkspacePanel = () => {
           variant="default"
         />
       </div>
-      <div>
+      <WorkspacePanelSection
+        label="Channels"
+        onIconClick={() => {setOpenCreateChannelModal(true)}}  // Placeholder for actual functionality
+      >
         {workspace?.channels?.map((channel) => {
             return <SideBarItem key={channel._id} icon={HashIcon} label={channel.name} id={channel._id} />
         })}
-      </div>
+      </WorkspacePanelSection>
     </div>
   );
 };
