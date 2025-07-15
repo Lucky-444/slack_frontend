@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
 import { useResetJoinCode } from "../../../hooks/apis/workspaces/useResetJoinCode";
+import { Link } from "react-router-dom";
 
 export const WorkspaceInviteModal = ({
   openInviteModal,
@@ -22,10 +23,10 @@ export const WorkspaceInviteModal = ({
 
   const { resetJoinCodeMutation } = useResetJoinCode(workspaceId);
   async function handleCopy() {
-    const inviteLink = `${window.location.origin}/join/${joinCode}`;
+    const inviteLink = `${joinCode}`;
     await navigator.clipboard.writeText(inviteLink);
     toast({
-      title: "Link copied to clipboard",
+      title: "Code copied to clipboard",
       type: "success",
     });
   }
@@ -40,7 +41,7 @@ export const WorkspaceInviteModal = ({
         title: "Join code reset successfully",
         type: "success",
       });
-        setOpenInviteModal(false);
+      setOpenInviteModal(false);
     } catch (error) {
       console.log("handleResetCode error", error);
       toast({
@@ -63,12 +64,16 @@ export const WorkspaceInviteModal = ({
         <div className="flex flex-col items-center justify-center py-10 gap-y-4">
           <p className="font-bold text-4xl uppercase">{joinCode}</p>
           <Button size="lg" variant="ghost" onClick={handleCopy}>
-            Copy Link
+            Copy Code
             <CopyIcon className="size-4 ml-2" />
+          </Button>
+
+          <Button size="lg" variant="outline">
+            <Link to={`/workspaces/join/${workspaceId}`}>Join Workspace</Link>
           </Button>
         </div>
         <div className="flex items-center justify-center w-full">
-          <Button variant="outline" onClick={handleResetCode}>
+          <Button variant="outline" onClick={handleResetCode} >
             Reset Join Code
             <RefreshCcwIcon className="size-4 ml-2" />
           </Button>

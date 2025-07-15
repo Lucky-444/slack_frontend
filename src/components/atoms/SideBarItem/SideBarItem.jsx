@@ -34,6 +34,8 @@ export const SideBarItem = ({
       <Link
         className="flex items-center gap-1.5 mx-1 my-0.5"
         to={`/workspaces/${workspaceId}/channels/${id}`}
+        //if there any logic fails then go to Routes.jsx
+        //may be in backend also
       >
         <Icon className="size-3.5 mr-1" />
         <span className="text-sm">{label}</span>
