@@ -1,23 +1,30 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import VerificationInput from "react-verification-input";
 
 import { Button } from "@/components/ui/button";
 import { useToast } from "../../hooks/use-toast";
+import { useAddMemberToWorkspace } from "../../hooks/apis/workspaces/useAddMemberToWorkspace";
+import { useJoinWorkspaceRequest } from "../../hooks/apis/workspaces/useJoinWorkspace";
 export const JoinPage = () => {
   const { workspaceId } = useParams();
   const { toast } = useToast();
-
-  async function handleAddMemberToWorkspace() {
-    // Logic to add the member to the workspace using the join code
-    // This could involve an API call to your backend to validate the join code
-    // For now, we'll just show a success message
+  const navigate = useNavigate();
+  const { addMemberToWorkspaceMutation } = useAddMemberToWorkspace(workspaceId);
+  const { joinWorkspaceMutation } = useJoinWorkspaceRequest(workspaceId);
+  async function handleAddMemberToWorkspace(joinCode) {
+    console.log("Join code received:", joinCode);
     try {
       // Simulate API call
-      console.log("Member added to workspace with ID:", workspaceId);
+      await joinWorkspaceMutation(joinCode);
+      console.log(
+        "You have been added to workspace successfully:",
+        workspaceId
+      );
       toast({
         title: "successfully added the member",
         type: "success",
       });
+      navigate(`/workspaces/${workspaceId}`);
     } catch (error) {
       console.error("Error joining workspace:", error);
       toast({

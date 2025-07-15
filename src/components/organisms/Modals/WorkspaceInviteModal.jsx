@@ -69,11 +69,18 @@ export const WorkspaceInviteModal = ({
           </Button>
 
           <Button size="lg" variant="outline">
-            <Link to={`/workspaces/join/${workspaceId}`}>Join Workspace</Link>
+            <a
+              href={`/workspaces/join/${workspaceId}`}
+              target="_blank"
+              rel="noreferrer"
+              className="text-blue-500"
+            >
+              Join Workspace
+            </a>
           </Button>
         </div>
         <div className="flex items-center justify-center w-full">
-          <Button variant="outline" onClick={handleResetCode} >
+          <Button variant="outline" onClick={handleResetCode}>
             Reset Join Code
             <RefreshCcwIcon className="size-4 ml-2" />
           </Button>
