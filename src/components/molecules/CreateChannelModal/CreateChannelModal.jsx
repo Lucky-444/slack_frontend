@@ -31,21 +31,30 @@ export const CreateChannelModal = () => {
   }
 
   async function handleFormSubmit(e) {
-    e.preventDefault();
-    await addChannelToWorkspaceMutation({
-      workspaceId: currentWorkspace?._id,
-      channelName: channelName,
-    });
-    toast({
-      type: "success",
-      title: "Channel created successfully",
-    });
+    try {
+      e.preventDefault();
+      await addChannelToWorkspaceMutation({
+        workspaceId: currentWorkspace?._id,
+        channelName: channelName,
+      });
+      toast({
+        type: "success",
+        title: "Channel created successfully",
+      });
 
-    queryClient.invalidateQueries(
-      `fetchWorkspaceById-${currentWorkspace?._id}`
-    );
+      queryClient.invalidateQueries(
+        `fetchWorkspaceById-${currentWorkspace?._id}`
+      );
 
-    handleClose();
+      handleClose();
+    } catch (error) {
+      console.log("Error creating channel:", error);
+      toast({
+        type: "success",
+        title: " can not create Channel",
+      });
+      handleClose();
+    }
   }
   return (
     <Dialog open={openCreateChannelModal} onOpenChange={handleClose}>
