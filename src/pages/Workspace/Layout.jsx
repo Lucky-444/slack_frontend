@@ -26,7 +26,7 @@ export const WorkspaceLayout = ({ children }) => {
           <ResizableHandle withHandle />
           <ResizablePanel minSize={20}>{children}</ResizablePanel>
         </ResizablePanelGroup>
-        {children}
+        
       </div>
     </div>
   );
