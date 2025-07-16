@@ -71,8 +71,8 @@ export const Editor = ({
       <div className="flex flex-col border border-slate-300 rounded-md overflow-hidden focus-within:shadow-sm focus-within:border-slate-400 bg-white">
         <div className="h-full ql-custom" ref={containerRef} />
       </div>
-      <p className="p-2 text-[15px] text-mutes-foreground flex justify-end mb-5">
-        <strong>Shift + return</strong> &nbsp; to add a new line
+      <p className="p-2 text-[15px] text-mutes-foreground flex justify-end mb-0.5">
+        <strong>Shift + enter</strong> &nbsp; to add a new line
       </p>
      
     </div>
