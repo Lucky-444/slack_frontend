@@ -1,6 +1,9 @@
 import "quill/dist/quill.snow.css";
 import Quill from "quill";
 import { useEffect, useRef, useState } from "react";
+import { PiTextAa } from "react-icons/pi";
+
+import { Button } from "@/components/ui/button";
 export const Editor = ({
   variant = "create",
   onSubmit,
@@ -18,6 +21,14 @@ export const Editor = ({
   const defaultValueRef = useRef();
   const quillRef = useRef();
   const placeholderRef = useRef();
+
+  function toggleToolbar() {
+    setIsToolbarVisible(!isToolbarVisible);
+    const toolbar = containerRef.current.querySelector(".ql-toolbar");
+    if (toolbar) {
+      toolbar.classList.toggle("hidden");
+    }
+  }
 
   useEffect(() => {
     if (!containerRef.current) return; // if containerRef is not initialized, return
@@ -67,14 +78,23 @@ export const Editor = ({
   }, []);
 
   return (
-    <div className="flex flex-col" mb-5>
+    <div className="flex flex-col">
       <div className="flex flex-col border border-slate-300 rounded-md overflow-hidden focus-within:shadow-sm focus-within:border-slate-400 bg-white">
         <div className="h-full ql-custom" ref={containerRef} />
+        <div className="flex px-2 pb-2 z-[5]">
+          <Button
+            size="iconSm"
+            variant="ghost"
+            disabled={false}
+            onClick={toggleToolbar}
+          >
+            <PiTextAa className="size-4" />
+          </Button>
+        </div>
       </div>
       <p className="p-2 text-[15px] text-mutes-foreground flex justify-end mb-0.5">
         <strong>Shift + enter</strong> &nbsp; to add a new line
       </p>
-     
     </div>
   );
 };
