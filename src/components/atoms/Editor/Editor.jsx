@@ -3,7 +3,8 @@ import { ImageIcon } from "lucide-react";
 import Quill from "quill";
 import { useEffect, useRef, useState } from "react";
 import { PiTextAa } from "react-icons/pi";
-import { Hint } from "../Hint/Hint"
+import { Hint } from "../Hint/Hint";
+import { MdSend } from "react-icons/md";
 import { Button } from "@/components/ui/button";
 export const Editor = ({
   variant = "create",
@@ -106,6 +107,23 @@ export const Editor = ({
               onClick={() => {}}
             >
               <ImageIcon className="size-4" />
+            </Button>
+          </Hint>
+          <Hint label="Send Message">
+            <Button
+              size="iconSm"
+              className="ml-auto bg-[#007a6a] hover:bg-[#007a6a]/80 text-white"
+              onClick={() => {
+                const messageCount = JSON.stringify(quillRef.current?.getContents());
+                
+                onSubmit({
+                  body : messageCount,
+                });
+                quillRef.current?.setText('');
+              }}
+              disabled={false}
+            >
+              <MdSend className="size-4" />
             </Button>
           </Hint>
         </div>
