@@ -30,63 +30,116 @@
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
-    --radius: 0.5rem
+    --radius: 0.5rem;
   }
-   a:hover {
+  a:hover {
     color: #747bff;
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%
+    .dark {
+      --background: 222.2 84% 4.9%;
+      --foreground: 210 40% 98%;
+      --card: 222.2 84% 4.9%;
+      --card-foreground: 210 40% 98%;
+      --popover: 222.2 84% 4.9%;
+      --popover-foreground: 210 40% 98%;
+      --primary: 210 40% 98%;
+      --primary-foreground: 222.2 47.4% 11.2%;
+      --secondary: 217.2 32.6% 17.5%;
+      --secondary-foreground: 210 40% 98%;
+      --muted: 217.2 32.6% 17.5%;
+      --muted-foreground: 215 20.2% 65.1%;
+      --accent: 217.2 32.6% 17.5%;
+      --accent-foreground: 210 40% 98%;
+      --destructive: 0 62.8% 30.6%;
+      --destructive-foreground: 210 40% 98%;
+      --border: 217.2 32.6% 17.5%;
+      --input: 217.2 32.6% 17.5%;
+      --ring: 212.7 26.8% 83.9%;
+      --chart-1: 220 70% 50%;
+      --chart-2: 160 60% 45%;
+      --chart-3: 30 80% 55%;
+      --chart-4: 280 65% 60%;
+      --chart-5: 340 75% 55%;
+    }
   }
-}
-@layer base {
-  * {
-    @apply border-border;
-  }
-  button {
-    background-color: #f9f9f9;
-  body {
-    @apply bg-background text-foreground;
-  }
-}
-        h1, h2, h3, h4, h5, h6 {
-        @apply font-semibold;
-        }
-        p {
-        @apply text-muted-foreground;
-        }
-        a {
-        @apply text-primary hover:text-primary-foreground;
-        }
-        input, textarea {
-        @apply bg-input text-foreground border-border focus:ring-ring focus:border-primary;
-        }
-        .dark {
-        body {
+  @layer base {
+    * {
+      @apply border-border;
+    }
+    button {
+      background-color: #f9f9f9;
+      body {
         @apply bg-background text-foreground;
-        }
-        }
-        }
+      }
+    }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      @apply font-semibold;
+    }
+    p {
+      @apply text-muted-foreground;
+    }
+    a {
+      @apply text-primary hover:text-primary-foreground;
+    }
+    input,
+    textarea {
+      @apply bg-input text-foreground border-border focus:ring-ring focus:border-primary;
+    }
+    .dark {
+      body {
+        @apply bg-background text-foreground;
+      }
+    }
+  }
+}
+
+
+.ql-toolbar {
+  border: none !important;
+  background-color: #f8f8f8 !important;
+}
+
+.ql-toolbar .ql-formats:not(:last-child) {
+  border-right: 1px solid #dcdcdc !important;
+  padding-right: 12px !important;
+}
+
+.ql-container {
+  border: none !important;
+  height: unset !important; /* automatically adjust w.r.t content */
+  font-family: 'Lato', sans-serif !important;
+}
+
+.ql-editor {
+  font-family: 'Lato', sans-serif !important;
+  font-size: 14px !important;
+  line-height: 22px !important;
+  padding: 8px 12px !important;
+  color: #1d1d1d !important;
+  font-weight: 400 !important;
+}
+
+.ql-editor a:hover {
+  text-decoration: underline !important;
+}
+
+.ql-editor a {
+  color: #1264a3 !important;
+}
+
+.ql-renderer {
+  padding: 0 !important;
+}
+
+.ql-editor:before {
+  left: 12px !important;
+  font-family: 'Lato', sans-serif !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  color: #8d8d8d !important;
+  @apply truncate;
 }
