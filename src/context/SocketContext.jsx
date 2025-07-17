@@ -12,7 +12,7 @@ export const SocketContextProvider = ({ children }) => {
 
     const socket = io("http://localhost:3000");
 
-    socket.on('NewMessageReceived', (data) => {
+    socket.on('NewMessageRecevied', (data) => {
         console.log('New message received', data);
         setMessageList([...messageList, data]);
     });
