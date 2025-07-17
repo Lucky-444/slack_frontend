@@ -8,8 +8,8 @@ import { WorkspaceContextProvider } from "./WorkspaceContext";
 import { WorkspacePreferencesModalContextProvider } from "./WorkspacePreferencesModalContext";
 
 export const AppContextProvider = combineContext(
-  SocketContextProvider,
   ChannelMessagesProvider,
+  SocketContextProvider,
   AuthContextProvider,
   WorkspaceContextProvider,
   CreateWorkspaceContextProvider,

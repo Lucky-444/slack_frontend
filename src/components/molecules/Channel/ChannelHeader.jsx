@@ -10,7 +10,6 @@ import {
 } from "@/components/ui/dialog";
 
 export const ChannelHeader = ({ name }) => {
-        console.log("ChannelHeader,jsx -> name : ->" ,name);
         
   return (
     <div className="bg-white border-b h-[50px] flex items-center px-4 overflow-hidden">

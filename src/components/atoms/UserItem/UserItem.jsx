@@ -21,7 +21,7 @@ const userItemVariants = cva(
 );
 
 export const UserItem = ({ id, label = "Member", image, variant }) => {
-  console.log("incoming label", label);
+  // console.log("incoming label", label);
   const { workspace } = useCurrentWorkspace();
 
   return (

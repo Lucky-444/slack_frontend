@@ -82,7 +82,7 @@ export const updateWorkspaceRequest = async ({ workspaceId, name, token }) => {
       }
     );
 
-    console.log("Response in updateWorkspaceRequest ->", response);
+    
 
     return response?.data?.data;
   } catch (error) {
@@ -103,7 +103,7 @@ export const addChannelToWorkspaceRequest = async ({ workspaceId, channelName, t
       }
     );
 
-    console.log("Response in addChannelToWorkspaceRequest ->", response);
+    
 
     return response?.data?.data;
   } catch (error) {
