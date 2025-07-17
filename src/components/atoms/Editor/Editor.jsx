@@ -109,17 +109,20 @@ export const Editor = ({
               <ImageIcon className="size-4" />
             </Button>
           </Hint>
-          <Hint label="Send Message">
+
+          <Hint label="Send Message" mx-2>
             <Button
               size="iconSm"
               className="ml-auto bg-[#007a6a] hover:bg-[#007a6a]/80 text-white"
               onClick={() => {
-                const messageCount = JSON.stringify(quillRef.current?.getContents());
-                
+                const messageCount = JSON.stringify(
+                  quillRef.current?.getContents()
+                );
+
                 onSubmit({
-                  body : messageCount,
+                  body: messageCount,
                 });
-                quillRef.current?.setText('');
+                quillRef.current?.setText("");
               }}
               disabled={false}
             >

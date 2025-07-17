@@ -17,6 +17,7 @@ export const MessageRenderer = ({ value }) => {
     });
     // Disable editting
     quill.disable();
+    //value is in string so we made it to json format
     const content = JSON.parse(value);
     quill.setContents(content);
     console.log("Content: ", quill.root.innerHTML);

@@ -86,3 +86,5 @@ When the data does not require frequent updates or trigger complex UI re-renders
 
 # what is the problem --> Read about context Hell in google
 
+## quill Editor tool 
+https://codepen.io/k3no/pen/amwpqZ
