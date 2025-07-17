@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
 
 import { useChannelMessages } from '@/hooks/context/useChannelMessages';
@@ -12,10 +12,13 @@ export const SocketContextProvider = ({ children }) => {
 
     const socket = io("http://localhost:3000");
 
-    socket.on('NewMessageRecevied', (data) => {
+  
+     socket.on('NewMessageRecevied', (data) => {
         console.log('New message received', data);
         setMessageList([...messageList, data]);
     });
+   
+   
 
     async function joinChannel(channelId) {
         socket.emit('JoinChannel', { channelId }, (data) => {
