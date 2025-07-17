@@ -18,45 +18,35 @@ export const Channel = () => {
   const { messages, isSuccess } = useGetChannelMessages(channelId);
   const { channelDetails, isFetching, isError } = useGetChannelById(channelId);
   const { joinChannel } = useSocket();
-  console.log("channrl details", channelDetails);
-  useEffect(() => {
-    console.log("ChannelId", channelId);
-    queryClient.invalidateQueries("getPaginatedMessages");
-  }, [channelId]);
 
   const messageContainerListRef = useRef(null);
+  const bottomRef = useRef(null); // ✅ Dummy div ref
 
+  // Refetch messages on channel change
   useEffect(() => {
-    if (messageContainerListRef.current) {
-      messageContainerListRef.current.scrollTop =
-        messageContainerListRef.current.scrollHeight;
-    }
-  }, [messageList]);
+    queryClient.invalidateQueries(["getPaginatedMessages"]);
+  }, [channelId]);
+
+  // Join socket room after fetch
   useEffect(() => {
     if (!isFetching && !isError) {
       joinChannel(channelId);
     }
   }, [isFetching, isError, joinChannel, channelId]);
 
-  console.log("messages", messages);
-  useEffect(() => {
-    const container = messageContainerListRef.current;
-    if (!container) return;
-
-    const isNearBottom =
-      container.scrollHeight - container.scrollTop - container.clientHeight <
-      50;
-
-    if (isNearBottom) {
-      container.scrollTop = container.scrollHeight;
-    }
-  }, [messageList]);
+  // Set initial messages
   useEffect(() => {
     if (isSuccess) {
-      console.log("Channel Messages fetched");
       setMessageList(messages);
     }
   }, [isSuccess, messages, setMessageList, channelId]);
+
+  // ✅ Scroll to bottom when messages change
+  useEffect(() => {
+    if (bottomRef.current) {
+      bottomRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messageList]);
 
   if (isFetching) {
     return (
@@ -74,6 +64,7 @@ export const Channel = () => {
       </div>
     );
   }
+
   return (
     <div className="flex flex-col h-full">
       <ChannelHeader name={channelDetails?.channel.name} />
@@ -82,8 +73,9 @@ export const Channel = () => {
         ref={messageContainerListRef}
         className="flex-5 overflow-y-auto p-5 gap-y-2"
       >
-        {messageList?.reverse().map((message) => {
-          return (
+        {[...messageList]
+          .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
+          .map((message) => (
             <Message
               key={message._id}
               body={message.body}
@@ -91,8 +83,10 @@ export const Channel = () => {
               authorName={message.senderId?.username}
               createdAt={message.createdAt}
             />
-          );
-        })}
+          ))}
+
+        {/* ✅ Dummy div at the bottom for auto-scroll */}
+        <div ref={bottomRef} />
       </div>
 
       <div className="flex-1" />

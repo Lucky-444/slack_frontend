@@ -14,6 +14,7 @@ export const useGetChannelMessages = (channelId) => {
         token: auth?.token,
       }),
     queryKey: ["getPaginatedMessages"],
+     cacheTime: 0
   });
 
   return {

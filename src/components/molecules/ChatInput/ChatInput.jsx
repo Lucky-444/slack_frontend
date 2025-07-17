@@ -25,7 +25,11 @@ export const ChatInput = () => {
     };
     console.log("Now NewMEssage is ->" , newMessage);
     
-    setMessageList([...messageList, newMessage]);
+    setMessageList((prev) =>
+      [...prev, newMessage].sort(
+        (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
+      )
+    );
     socket?.emit(
       "NewMessage",
       {
